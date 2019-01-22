@@ -18,6 +18,11 @@ export interface FixerCall {
   rates: object;
 }
 
+export interface SymbolsCall {
+  success: boolean;
+  symbols: object;
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -32,5 +37,11 @@ export class FixerService {
     const URL = this.latestUrl(query);
 
     return this.http.get<FixerCall>(URL);
+  }
+
+  symbols(): Observable<SymbolsCall> {
+    const URL = `${BASE_URL}/symbols&access_key=${ACCESS_KEY}`;
+
+    return this.http.get<SymbolsCall>(URL);
   }
 }

@@ -1,10 +1,22 @@
-from: <input type="text"  [(ngModel)]="query.from" />
+from:
+<select [(ngModel)]="query.from">
+  <option *ngFor="let key of symbolsKeys" [value]="key">
+    {{key}} - {{symbols[key]}}
+  </option>
+</select>
 <br />
-to: <input type="text" [(ngModel)]="query.to" />
+to:
+<select [(ngModel)]="query.to">
+  <option *ngFor="let key of symbolsKeys" [value]="key">
+    {{key}} - {{symbols[key]}}
+  </option>
+</select>
 <br />
 amount: <input type="number" [(ngModel)]="amount" />
 <br />
-<button>Get </button>
+<button (click)="getCurrency()">Get </button>
 <hr />
 <div *ngIf="error">Error on currency fetch, please try again</div>
 <div *ngIf="!error">RESULT: {{result}}</div>
+
+<hr />

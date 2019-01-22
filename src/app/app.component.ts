@@ -8,9 +8,12 @@ import { FixerService, Query } from "./fixer.service";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  symbols: object = {};
+
   result = 0.0;
   error = false;
   amount = 1;
+
   query: Query = {
     from: "USD",
     to: "BRL"
@@ -20,12 +23,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrency();
+    this.getSymbols();
   }
 
   getCurrency() {
     this.fixer.fetch(this.query).subscribe(({success, rates}) => {
       if (success) {
-        this.result = this.calcResult(rates[this.query.from], rates[this.query.to], this.amount);
+        this.result = this.calcResult (rates[this.query.from])
+                                      (rates[this.query.to])
+                                      (this.amount);
         this.error = false;
       } else {
         this.error = true;
@@ -34,7 +40,19 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private calcResult(from: number, to:number, amount: number) {
+  get symbolsKeys() {
+    return Object.keys(this.symbols);
+  }
+
+  private calcResult = (from: number) => (to:number) => (amount: number) => {
     return (to/from) * amount;
+  }
+
+  private getSymbols() {
+    this.fixer.symbols().subscribe(({success, symbols}) => {
+      if(success) {
+        this.symbols = symbols;
+      }
+    });
   }
 }
