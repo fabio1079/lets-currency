@@ -1,12 +1,33 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { FixerService } from './fixer.service';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-describe('FixerService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+import { FixerService } from "./fixer.service";
 
-  it('should be created', () => {
+const FixerSymbolsMockResponse = {
+  success: true,
+  symbols: {
+    USD: "United States Dollar",
+    BRL: "Brazilian Real"
+  }
+};
+
+describe("FixerService", () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    });
+  });
+
+  it("should be created", () => {
     const service: FixerService = TestBed.get(FixerService);
     expect(service).toBeTruthy();
+  });
+
+  it('Get symbols from API', () => {
+    const service: FixerService = TestBed.get(FixerService);
+    spyOn(service, "symbols").and.returnValue(FixerSymbolsMockResponse);
+
+    expect(service.symbols()).toBe(FixerSymbolsMockResponse);
   });
 });
