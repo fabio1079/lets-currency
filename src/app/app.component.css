@@ -1,0 +1,18 @@
+.margin-10-top-bottom {
+  margin: 10px 0;
+}
+
+#amount {
+  width: 150px;
+}
+
+.app-card {
+  max-width: 850px;
+  margin: 10px 0 0 0;
+}
+
+@media screen and (max-width: 600px)  {
+  .app-card {
+    margin: 0;
+  }
+}

@@ -1,24 +1,75 @@
-from:
-<select [(ngModel)]="query.from">
-  <option *ngFor="let key of symbolsKeys" [value]="key">
-    {{key}} - {{symbols[key]}}
-  </option>
-</select>
-<br />
-<button (click)="swapCurrencies()">Swap Currencies</button>
-<br />
-to:
-<select [(ngModel)]="query.to">
-  <option *ngFor="let key of symbolsKeys" [value]="key">
-    {{key}} - {{symbols[key]}}
-  </option>
-</select>
-<br />
-amount: <input type="number" [(ngModel)]="amount" />
-<br />
-<button (click)="getCurrency()">Get </button>
-<hr />
-<div *ngIf="error">Error on currency fetch, please try again</div>
-<div *ngIf="!error">RESULT: {{result}}</div>
+<div class="container-fluid h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="card app-card">
+      <div class="card-body">
+        <h5 class="card-title">Check currencies around the world</h5>
+        <hr />
 
-<hr />
+        <div class="row">
+          <div class="col col-md-12">
+            <div class="form-row">
+              <div class="col-md-1"><label for="from">From:</label></div>
+
+              <div class="col-md-11">
+                <select
+                  id="from"
+                  [(ngModel)]="query.from"
+                  class="custom-select"
+                >
+                  <option *ngFor="let key of symbolsKeys" [value]="key">
+                    {{ key }} - {{ symbols[key] }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col col-12 margin-10-top-bottom">
+            <button (click)="swapCurrencies()" class="btn btn-link">
+              Swap Currencies
+            </button>
+          </div>
+
+          <div class="col col-md-12">
+            <div class="form-row">
+              <div class="col-md-1"><label for="to">To:</label></div>
+              <div class="col-md-11">
+                <select id="to" [(ngModel)]="query.to" class="custom-select">
+                  <option *ngFor="let key of symbolsKeys" [value]="key">
+                    {{ key }} - {{ symbols[key] }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col col-12 margin-10-top-bottom">
+            <div class="form-row">
+              <div class="col-md-1"><label for="amount">Amount:</label></div>
+              <div class="col-md-11">
+                <input
+                  id="amount"
+                  type="number"
+                  [(ngModel)]="amount"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col col-12 margin-10-top-bottom">
+            <button (click)="getCurrency()" class="btn btn-outline-primary">
+              Get Currency
+            </button>
+          </div>
+
+          <div class="col col-12">
+            <hr />
+            <div *ngIf="error">Error on currency fetch, please try again</div>
+            <div *ngIf="!error">RESULT: {{ result }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
