@@ -5,6 +5,8 @@ from:
   </option>
 </select>
 <br />
+<button (click)="swapCurrencies()">Swap Currencies</button>
+<br />
 to:
 <select [(ngModel)]="query.to">
   <option *ngFor="let key of symbolsKeys" [value]="key">

@@ -44,6 +44,14 @@ export class AppComponent implements OnInit {
     return Object.keys(this.symbols);
   }
 
+  swapCurrencies() {
+    const tempFrom = this.query.from;
+    this.query.from = this.query.to;
+    this.query.to = tempFrom;
+
+    this.getCurrency();
+  }
+
   private calcResult = (from: number) => (to:number) => (amount: number) => {
     return (to/from) * amount;
   }
