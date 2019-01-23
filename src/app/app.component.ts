@@ -27,16 +27,21 @@ export class AppComponent implements OnInit {
   }
 
   getCurrency() {
-    this.fixer.fetch(this.query).subscribe(({success, rates}) => {
-      if (success) {
-        this.result = this.calcResult (rates[this.query.from])
-                                      (rates[this.query.to])
-                                      (this.amount);
-        this.error = false;
-      } else {
-        this.error = true;
-        this.result = 0;
-      }
+    this.fixer.fetch(this.query).subscribe(
+      ({success, rates}) => {
+        if (success) {
+          this.result = this.calcResult (rates[this.query.from])
+                                        (rates[this.query.to])
+                                        (this.amount);
+          this.error = false;
+        } else {
+          this.error = true;
+          this.result = 0;
+        }
+    },
+    error => {
+      this.error = true;
+      this.result = 0;
     });
   }
 
