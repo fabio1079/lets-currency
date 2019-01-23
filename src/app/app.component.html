@@ -65,8 +65,15 @@
 
           <div class="col col-12">
             <hr />
-            <div *ngIf="error">Error on currency fetch, please try again</div>
             <div *ngIf="!error" id="result">RESULT: {{ result }}</div>
+            <div *ngIf="error">
+              Error on currency fetch, please try again.
+              <small>
+                This site uses Fixer.io API free subscription that don't suport https.
+                So if you are uing firefox, our http requests to fixer.io will not work.
+                In this case, please try another browser.
+              </small>
+            </div>
           </div>
         </div>
       </div>
